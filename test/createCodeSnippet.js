@@ -3,7 +3,10 @@ const { Pool } = require("pg");
 const { getIndexFromErrorPosition } = require("../src");
 const { createCodeSnippet } = require("../src/create-code-snippet");
 
-const pool = new Pool({ connectionString: "pg_error_snippet" });
+const pool = new Pool({
+  connectionString:
+    "postgres://postgres:postgres@localhost:5432/pg_error_snippet"
+});
 
 test("find comma bug", async t => {
   const query = `
