@@ -14,9 +14,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: apt update --fix-missing && apt install -y postgresql-client
     - run: yarn
     - run: yarn db start
     - run: yarn db create-user
+    - run: yarn db reset-schema
     - run: yarn test
       env:
         CI: true
