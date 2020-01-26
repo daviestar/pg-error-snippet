@@ -1,11 +1,11 @@
-const test = require('ava')
-const {Pool} = require('pg')
-const {getIndexFromErrorPosition} = require('../src')
-const {createCodeSnippet} = require('../src/create-code-snippet')
+const test = require("ava");
+const { Pool } = require("pg");
+const { getIndexFromErrorPosition } = require("../src");
+const { createCodeSnippet } = require("../src/create-code-snippet");
 
-const pool = new Pool({ connectionString: 'postgres://melty:puffs@localhost:5434/sqlmodules' })
+const pool = new Pool({ connectionString: "sqlmodules" });
 
-test('find comma bug', async (t) => {
+test("find comma bug", async t => {
   const query = `
     CREATE TABLE foo(
       col1 INTEGER,
@@ -18,18 +18,20 @@ test('find comma bug', async (t) => {
       col8 INTEGER,
       col9 INTEGER
     );
-  `
+  `;
   try {
-    await pool.query(query)
-  } catch(err) {
-    const index = getIndexFromErrorPosition(err.position, query)
-    const snippet = createCodeSnippet(index, query, {errorStyle: 'highlight'})
+    await pool.query(query);
+  } catch (err) {
+    const index = getIndexFromErrorPosition(err.position, query);
+    const snippet = createCodeSnippet(index, query, {
+      errorStyle: "highlight"
+    });
     // console.log(snippet)
-    t.snapshot(snippet)
+    t.snapshot(snippet);
   }
-})
+});
 
-test('find typo bug', async (t) => {
+test("find typo bug", async t => {
   const query = `
     CRATE TABLE foo(
       col1 INTEGER,
@@ -42,18 +44,18 @@ test('find typo bug', async (t) => {
       col8 INTEGER,
       col9 INTEGER
     );
-  `
+  `;
   try {
-    await pool.query(query)
-  } catch(err) {
-    const index = getIndexFromErrorPosition(err.position, query)
-    const snippet = createCodeSnippet(index, query)
+    await pool.query(query);
+  } catch (err) {
+    const index = getIndexFromErrorPosition(err.position, query);
+    const snippet = createCodeSnippet(index, query);
     // console.log(snippet)
-    t.snapshot(snippet)
+    t.snapshot(snippet);
   }
-})
+});
 
-test('find parenthesis bug', async (t) => {
+test("find parenthesis bug", async t => {
   const query = `
     CREATE TABLE foo)
       col1 INTEGER,
@@ -66,18 +68,21 @@ test('find parenthesis bug', async (t) => {
       col8 INTEGER,
       col9 INTEGER
     );
-  `
+  `;
   try {
-    await pool.query(query)
-  } catch(err) {
-    const index = getIndexFromErrorPosition(err.position, query)
-    const snippet = createCodeSnippet(index, query, {linesBefore: 2, linesAfter: 2})
+    await pool.query(query);
+  } catch (err) {
+    const index = getIndexFromErrorPosition(err.position, query);
+    const snippet = createCodeSnippet(index, query, {
+      linesBefore: 2,
+      linesAfter: 2
+    });
     // console.log(snippet)
-    t.snapshot(snippet)
+    t.snapshot(snippet);
   }
-})
+});
 
-test('find typo bug 2', async (t) => {
+test("find typo bug 2", async t => {
   const query = `
     CREATE TABLE foo(
       col1 INTEGER,
@@ -90,13 +95,13 @@ test('find typo bug 2', async (t) => {
       col8 INTEGER,
       col9 INTEGER
     );
-  `
+  `;
   try {
-    await pool.query(query)
-  } catch(err) {
-    const index = getIndexFromErrorPosition(err.position, query)
-    const snippet = createCodeSnippet(index, query)
+    await pool.query(query);
+  } catch (err) {
+    const index = getIndexFromErrorPosition(err.position, query);
+    const snippet = createCodeSnippet(index, query);
     // console.log(snippet)
-    t.snapshot(snippet)
+    t.snapshot(snippet);
   }
-})
+});
