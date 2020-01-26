@@ -9,16 +9,13 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: apt update --fix-missing && apt install -y postgresql-client
-    - run: yarn
-    - run: yarn db start
-    - run: yarn db create-user
-    - run: yarn db reset-schema
-    - run: yarn test
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn db start
+      - run: yarn test
+        env:
+          CI: true
