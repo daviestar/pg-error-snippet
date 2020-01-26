@@ -5,7 +5,7 @@ DATABASE='pg_error_snippet'
 USER='postgres'
 PASSWORD='postgres'
 HOST='localhost'
-PORT=5435
+PORT=5432
 
 function startDocker() {
   if [ $(docker ps -q -a -f name=$CONTAINER_NAME) ]; then
