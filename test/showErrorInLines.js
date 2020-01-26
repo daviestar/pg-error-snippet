@@ -109,7 +109,7 @@ test("show error on first character of first line with errorStyle highlight", as
   t.snapshot(output);
 });
 
-test.only("show error on last character of last line with errorStyle highlight", async t => {
+test("show error on last character of last line with errorStyle highlight", async t => {
   const snippet = [
     {
       index: 0,
@@ -125,7 +125,6 @@ test.only("show error on last character of last line with errorStyle highlight",
     }
   ];
   const output = showErrorInLines(snippet, 2, 18, { errorStyle: "highlight" });
-  console.log(output.map(o => o.content).join("\n"));
-  console.log(output);
+  // console.log(output.map(o => o.content).join("\n"));
   t.snapshot(output);
 });
