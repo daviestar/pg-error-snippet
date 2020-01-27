@@ -10,9 +10,11 @@ function handleError(err, query, opts = {}) {
     const snippet = createCodeSnippetFromError(err, query, opts)
     console.log(
       message + '\n' +
-      snippet + '\n' +
-      opts.showStack ? err.stack : ''
+      snippet + '\n'
     )
+    if (opts.showStack) {
+      console.log(err.stack)
+    }
   }
 }
 
