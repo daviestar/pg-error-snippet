@@ -35,14 +35,7 @@ function destroyDocker() {
 }
 
 function usage() {
-  echo "Usage: docker <command>"
-  echo "Available commands:"
-  echo "start"
-  echo "stop"
-  echo "destroy"
-  echo "create-user"
-  echo "reset"
-  echo "pqsl"
+  echo "Usage: docker <start|stop|destroy>"
   exit 1
 }
 
